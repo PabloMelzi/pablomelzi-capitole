@@ -15,27 +15,30 @@ import static org.assertj.core.api.Assertions.*;
 class GetPriceServiceTest {
 
     private PriceRepositoryPort repoWithData = (date, productId, brandId) -> List.of(
-            Price.builder()
-                    .productId(35455L)
-                    .brandId(1L)
-                    .priceList(1)
-                    .priority(0)
-                    .price(new BigDecimal("35.50"))
-                    .currency("EUR")
-                    .startDate(LocalDateTime.parse("2020-06-14T00:00:00"))
-                    .endDate(LocalDateTime.parse("2020-12-31T23:59:59"))
-                    .build(),
-            Price.builder()
-                    .productId(35455L)
-                    .brandId(1L)
-                    .priceList(2)
-                    .priority(1)
-                    .price(new BigDecimal("25.45"))
-                    .currency("EUR")
-                    .startDate(LocalDateTime.parse("2020-06-14T15:00:00"))
-                    .endDate(LocalDateTime.parse("2020-06-14T18:30:00"))
-                    .build()
-    );
+                    Price.builder()
+                            .productId(35455L)
+                            .brandId(1L)
+                            .priceList(1)
+                            .priority(0)
+                            .price(new BigDecimal("35.50"))
+                            .currency("EUR")
+                            .startDate(LocalDateTime.parse("2020-06-14T00:00:00"))
+                            .endDate(LocalDateTime.parse("2020-12-31T23:59:59"))
+                            .build(),
+                    Price.builder()
+                            .productId(35455L)
+                            .brandId(1L)
+                            .priceList(2)
+                            .priority(1)
+                            .price(new BigDecimal("25.45"))
+                            .currency("EUR")
+                            .startDate(LocalDateTime.parse("2020-06-14T15:00:00"))
+                            .endDate(LocalDateTime.parse("2020-06-14T18:30:00"))
+                            .build()
+            ).stream()
+            .filter(p -> !date.isBefore(p.getStartDate()) && !date.isAfter(p.getEndDate()))
+            .toList();
+
 
     @Test
     void devuelvePrecioConMayorPrioridadSiHaySolapamiento() {

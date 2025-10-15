@@ -3,6 +3,7 @@ package com.pablomelzi.prueba.infrastructure.in.exception;
 import com.pablomelzi.prueba.domain.exception.PriceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,5 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // Podemos agregar más manejadores si es necesario (400, 500, etc.)
 }
 
