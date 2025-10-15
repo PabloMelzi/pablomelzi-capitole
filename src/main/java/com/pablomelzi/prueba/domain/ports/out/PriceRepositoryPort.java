@@ -1,4 +1,10 @@
 package com.pablomelzi.prueba.domain.ports.out;
 
-public class PriceRepositoryPort {
+import com.pablomelzi.prueba.domain.model.Price;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface PriceRepositoryPort {
+    List<Price> findPrices(LocalDateTime date, long productId, long brandId);
 }
