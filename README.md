@@ -1,5 +1,3 @@
-Aquí tienes un ejemplo de README completo para tu proyecto, cubriendo descripción, arquitectura, endpoints, ejecución, testing y detalles técnicos.
-
 ```markdown
 # Prueba de Precios - API Spring Boot
 
