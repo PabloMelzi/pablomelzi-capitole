@@ -17,5 +17,5 @@ public class Price {
     private String currency;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-}
 
+}

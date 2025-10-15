@@ -1,4 +1,3 @@
-// infrastructure/out/persistence/PriceRepositoryAdapter.java
 package com.pablomelzi.prueba.infrastructure.out.persistence;
 
 import com.pablomelzi.prueba.domain.model.Price;
@@ -7,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PriceRepositoryAdapter implements PriceRepositoryPort {
@@ -19,7 +19,26 @@ public class PriceRepositoryAdapter implements PriceRepositoryPort {
 
     @Override
     public List<Price> findPrices(LocalDateTime date, long productId, long brandId) {
-        // A implementar: transformar entidades a modelo
-        return null;
+        List<PriceEntity> entities = jpaPriceRepository
+                .findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
+                        productId, brandId, date, date);
+
+        return entities.stream()
+                .map(this::mapToDomain)
+                .collect(Collectors.toList());
+    }
+
+    private Price mapToDomain(PriceEntity entity) {
+        return Price.builder()
+                .productId(entity.getProductId())
+                .brandId(entity.getBrandId())
+                .priceList(entity.getPriceList())
+                .priority(entity.getPriority())
+                .price(entity.getPrice())
+                .currency(entity.getCurrency())
+                .startDate(entity.getStartDate())
+                .endDate(entity.getEndDate())
+                .build();
     }
 }
+

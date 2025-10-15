@@ -1,4 +1,3 @@
-// infrastructure/in/rest/PriceController.java
 package com.pablomelzi.prueba.infrastructure.in;
 
 import com.pablomelzi.prueba.domain.model.Price;
@@ -24,4 +23,5 @@ public class PriceController {
         return getPriceQuery.getPrice(applicationDate, productId, brandId);
     }
 }
+
 
