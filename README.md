@@ -112,6 +112,12 @@ mvn test
 ```
 curl "http://localhost:8080/prices?applicationDate=2020-06-14T16:00:00&productId=35455&brandId=1"
 ```
+## Cobertura de Tests con JaCoCo
+Para generar y visualizar el reporte de cobertura de código:
+- Ejecuta los tests y genera el reporte:
+mvn clean test jacoco:report
+- Abre el archivo de reporte en tu navegador:
+target/site/jacoco/index.html
 
 ## Contacto
 

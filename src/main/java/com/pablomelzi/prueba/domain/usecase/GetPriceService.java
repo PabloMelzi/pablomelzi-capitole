@@ -9,8 +9,14 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
 public class GetPriceService implements GetPriceQuery {
 
+    private static final Logger logger = LoggerFactory.getLogger(GetPriceService.class);
     private final PriceRepositoryPort priceRepository;
 
     public GetPriceService(PriceRepositoryPort priceRepository) {
@@ -19,14 +25,19 @@ public class GetPriceService implements GetPriceQuery {
 
     @Override
     public Price getPrice(LocalDateTime applicationDate, long productId, long brandId) {
+        logger.info("Buscando precio: productId={}, brandId={}, date={}", productId, brandId, applicationDate);
         List<Price> prices = priceRepository.findPrices(applicationDate, productId, brandId);
 
         return prices.stream()
                 .max(Comparator.comparingInt(Price::getPriority))
-                .orElseThrow(() -> new PriceNotFoundException(
-                        String.format("No price found for productId %d, brandId %d, date %s",
-                                productId, brandId, applicationDate)));
+                .orElseThrow(() -> {
+                    logger.error("No se encontró precio para productId={}, brandId={}, date={}", productId, brandId, applicationDate);
+                    return new PriceNotFoundException(
+                            String.format("No price found for productId %d, brandId %d, date %s",
+                                    productId, brandId, applicationDate));
+                });
     }
 }
+
 
 

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS prices;
 CREATE TABLE prices (
   id INT AUTO_INCREMENT PRIMARY KEY,
   brand_id INT,
