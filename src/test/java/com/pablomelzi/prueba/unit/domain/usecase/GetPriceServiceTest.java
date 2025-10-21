@@ -41,7 +41,7 @@ class GetPriceServiceTest {
 
 
     @Test
-    void devuelvePrecioConMayorPrioridadSiHaySolapamiento() {
+    void returnsPriceWithHighestPriorityIfOverlap() {
         GetPriceService service = new GetPriceService(repoWithData);
         Price price = service.getPrice(LocalDateTime.parse("2020-06-14T16:00:00"), 35455L, 1L);
         assertThat(price.getPriceList()).isEqualTo(2);
@@ -49,7 +49,7 @@ class GetPriceServiceTest {
     }
 
     @Test
-    void lanzaExcepcionSiNoHayPrecio() {
+    void throwsExceptionIfNoPrice() {
         PriceRepositoryPort emptyRepo = (date, productId, brandId) -> List.of();
         GetPriceService service = new GetPriceService(emptyRepo);
         assertThatThrownBy(() -> service.getPrice(LocalDateTime.now(), 99999L, 1L))
@@ -58,24 +58,23 @@ class GetPriceServiceTest {
     }
 
     @Test
-    void seleccionaPrecioEnElBordeDeFechaInicio() {
+    void selectsPriceOnStartDateEdge() {
         GetPriceService service = new GetPriceService(repoWithData);
         Price price = service.getPrice(LocalDateTime.parse("2020-06-14T00:00:00"), 35455L, 1L);
         assertThat(price.getPriceList()).isEqualTo(1);
     }
 
     @Test
-    void seleccionaPrecioEnElBordeDeFechaFin() {
+    void selectsPriceOnEndDateEdge() {
         GetPriceService service = new GetPriceService(repoWithData);
         Price price = service.getPrice(LocalDateTime.parse("2020-12-31T23:59:59"), 35455L, 1L);
         assertThat(price.getPriceList()).isEqualTo(1);
     }
 
     @Test
-    void devuelveMonedaCorrecta() {
+    void returnsCorrectCurrency() {
         GetPriceService service = new GetPriceService(repoWithData);
         Price price = service.getPrice(LocalDateTime.parse("2020-06-14T10:00:00"), 35455L, 1L);
         assertThat(price.getCurrency()).isEqualTo("EUR");
     }
 }
-

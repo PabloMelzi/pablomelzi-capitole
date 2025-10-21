@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PriceControllerTest {
 
     @Test
-    void devuelvePrecioCorrecto() {
+    void throwCorrectPrice() {
         GetPriceQuery mockQuery = Mockito.mock(GetPriceQuery.class);
         Price expected = Price.builder()
                 .productId(35455L)

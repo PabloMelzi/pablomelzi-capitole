@@ -18,7 +18,7 @@ class PriceEntityTest {
     private JpaPriceRepository repository;
 
     @Test
-    void persisteYRecuperaEntidadCorrectamente() {
+    void persistAndRecoverEntityCorrectly() {
         PriceEntity entity = new PriceEntity();
         entity.setBrandId(1L);
         entity.setStartDate(LocalDateTime.parse("2020-06-14T00:00:00"));

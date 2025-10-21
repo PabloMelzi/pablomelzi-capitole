@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PriceRepositoryAdapterTest {
 
     @Test
-    void mapeaCorrectamenteEntidadADominio() {
+    void mapCorrectlyEntityToDomain() {
         JpaPriceRepository jpaRepo = Mockito.mock(JpaPriceRepository.class);
         PriceEntity entity = new PriceEntity();
         entity.setProductId(35455L);
@@ -50,7 +50,7 @@ class PriceRepositoryAdapterTest {
     }
 
     @Test
-    void devuelveListaVaciaSiNoHayResultados() {
+    void throwAEmptyListIfThereIsNoResults() {
         JpaPriceRepository jpaRepo = Mockito.mock(JpaPriceRepository.class);
         Mockito.when(jpaRepo.findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
                         99999L, 1L, LocalDateTime.parse("2020-06-14T10:00:00"), LocalDateTime.parse("2020-06-14T10:00:00")))

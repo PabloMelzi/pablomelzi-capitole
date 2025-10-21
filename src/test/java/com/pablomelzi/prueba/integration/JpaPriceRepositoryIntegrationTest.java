@@ -20,7 +20,7 @@ class JpaPriceRepositoryIntegrationTest {
     private JpaPriceRepository repository;
 
     @Test
-    void encuentraPreciosPorParametrosYFechas() {
+    void findPriceWithParamsAndDate() {
         List<PriceEntity> results = repository.findByProductIdAndBrandIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
                 35455L, 1L, LocalDateTime.parse("2020-06-14T16:00:00"), LocalDateTime.parse("2020-06-14T16:00:00"));
 

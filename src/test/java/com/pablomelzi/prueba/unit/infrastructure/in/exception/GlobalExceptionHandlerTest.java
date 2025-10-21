@@ -28,7 +28,7 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
-    void devuelve404YMensajeCorrectoCuandoNoHayPrecio() throws Exception {
+    void throw404AndCorrectMessageWhenThereIsNotPrice() throws Exception {
         MockMvc mockMvc = MockMvcBuilders
                 .standaloneSetup(new TestController())
                 .setControllerAdvice(new GlobalExceptionHandler())
